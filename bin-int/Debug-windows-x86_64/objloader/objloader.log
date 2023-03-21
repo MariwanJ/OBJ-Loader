@@ -1,3 +1,0 @@
-﻿  obj_loader.cpp
-E:\Projects\Design456App\frtk\vendor\objloader\src\obj_loader.cpp(709,25): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-  objloader.vcxproj -> E:\Projects\Design456App\frtk\vendor\objloader\bin\Debug-windows-x86_64\objloader\objloader.lib
