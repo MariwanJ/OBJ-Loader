@@ -1,7 +1,8 @@
 # OBJ LOADER
 
 Note: This version is forked and modified to be as a static library to my project. Even the file is splited to cpp and h file to make it easy for reading. (Mariwan)
-/////////////////////////////////////////////////////////////////
+
+--............................................................................--
 
 
 The quick to use single header OBJ loader
