@@ -5,6 +5,8 @@ ehthumbs.db
 /bin
 /bin-int
 
+*.vcxproj
+
 # Folder config file
 Desktop.ini
 

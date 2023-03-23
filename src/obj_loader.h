@@ -66,24 +66,24 @@ struct Material
     std::string map_bump;
 };
 
-// Structure: Mesh
-// Description: A Simple Mesh Object that holds	a name, a vertex list, and an index list
-class Mesh
+// Structure: newMesh
+// Description: A Simple newMesh Object that holds	a name, a vertex list, and an index list
+class newMesh
 {
 public:
     // Default Constructor
-    Mesh();
+    newMesh();
     // Variable Set Constructor
-    Mesh(std::vector<Vertex>& _Vertices, std::vector<unsigned int>& _Indices);
+    newMesh(std::vector<Vertex>& _Vertices, std::vector<unsigned int>& _Indices);
 
-    std::string MeshName;
+    std::string newMeshName;
     // Vertex List
     std::vector<Vertex> Vertices;
     // Index List
     std::vector<unsigned int> Indices;
 
     // Material
-    Material MeshMaterial;
+    Material newMeshMaterial;
 };
 
 // Namespace: Math
@@ -149,8 +149,8 @@ public:
     // or unable to be loaded return false
     bool LoadFile(std::string Path);
 
-    // Loaded Mesh Objects
-    std::vector<Mesh> LoadedMeshes;
+    // Loaded newMesh Objects
+    std::vector<newMesh> LoadednewMeshes;
     // Loaded Vertex Objects
     std::vector<Vertex> LoadedVertices;
     // Loaded Index Positions

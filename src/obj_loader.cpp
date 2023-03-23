@@ -3,12 +3,12 @@
 #include <obj_loader.h>
 
         // Default Constructor
-Mesh::Mesh()
+newMesh::newMesh()
 {
 }
 
 // Variable Set Constructor
-Mesh::Mesh(std::vector<Vertex>& _Vertices, std::vector<unsigned int>& _Indices)
+newMesh::newMesh(std::vector<Vertex>& _Vertices, std::vector<unsigned int>& _Indices)
 {
     Vertices = _Vertices;
     Indices = _Indices;
@@ -195,7 +195,7 @@ Loader::Loader()
 }
 Loader::~Loader()
 {
-    LoadedMeshes.clear();
+    LoadednewMeshes.clear();
 }
 
 // Load a file into the loader
@@ -215,7 +215,7 @@ bool Loader::LoadFile(std::string Path)
     if (!file.is_open())
         return false;
 
-    LoadedMeshes.clear();
+    LoadednewMeshes.clear();
     LoadedVertices.clear();
     LoadedIndices.clear();
 
@@ -226,12 +226,12 @@ bool Loader::LoadFile(std::string Path)
     std::vector<Vertex> Vertices;
     std::vector<unsigned int> Indices;
 
-    std::vector<std::string> MeshMatNames;
+    std::vector<std::string> newMeshMatNames;
 
     bool listening = false;
-    std::string meshname;
+    std::string newMeshname;
 
-    Mesh tempMesh;
+    newMesh tempnewMesh;
 
 #ifdef OBJL_CONSOLE_OUTPUT
     const unsigned int outputEveryNth = 1000;
@@ -244,20 +244,20 @@ bool Loader::LoadFile(std::string Path)
 #ifdef OBJL_CONSOLE_OUTPUT
         if ((outputIndicator = ((outputIndicator + 1) % outputEveryNth)) == 1)
         {
-            if (!meshname.empty())
+            if (!newMeshname.empty())
             {
                 std::cout
-                    << "\r- " << meshname
+                    << "\r- " << newMeshname
                     << "\t| vertices > " << Positions.size()
                     << "\t| texcoords > " << TCoords.size()
                     << "\t| normals > " << Normals.size()
                     << "\t| triangles > " << (Vertices.size() / 3)
-                    << (!MeshMatNames.empty() ? "\t| material: " + MeshMatNames.back() : "");
+                    << (!newMeshMatNames.empty() ? "\t| material: " + newMeshMatNames.back() : "");
             }
         }
 #endif
 
-        // Generate a Mesh Object or Prepare for an object to be created
+        // Generate a newMesh Object or Prepare for an object to be created
         if (firstToken(curline) == "o" || firstToken(curline) == "g" || curline[0] == 'g')
         {
             if (!listening)
@@ -266,42 +266,42 @@ bool Loader::LoadFile(std::string Path)
 
                 if (firstToken(curline) == "o" || firstToken(curline) == "g")
                 {
-                    meshname = tail(curline);
+                    newMeshname = tail(curline);
                 }
                 else
                 {
-                    meshname = "unnamed";
+                    newMeshname = "unnamed";
                 }
             }
             else
             {
-                // Generate the mesh to put into the array
+                // Generate the newMesh to put into the array
 
                 if (!Indices.empty() && !Vertices.empty())
                 {
-                    // Create Mesh
-                    tempMesh = Mesh(Vertices, Indices);
-                    tempMesh.MeshName = meshname;
+                    // Create newMesh
+                    tempnewMesh = newMesh(Vertices, Indices);
+                    tempnewMesh.newMeshName = newMeshname;
 
-                    // Insert Mesh
-                    LoadedMeshes.push_back(tempMesh);
+                    // Insert newMesh
+                    LoadednewMeshes.push_back(tempnewMesh);
 
                     // Cleanup
                     Vertices.clear();
                     Indices.clear();
-                    meshname.clear();
+                    newMeshname.clear();
 
-                    meshname = tail(curline);
+                    newMeshname = tail(curline);
                 }
                 else
                 {
                     if (firstToken(curline) == "o" || firstToken(curline) == "g")
                     {
-                        meshname = tail(curline);
+                        newMeshname = tail(curline);
                     }
                     else
                     {
-                        meshname = "unnamed";
+                        newMeshname = "unnamed";
                     }
                 }
             }
@@ -377,29 +377,29 @@ bool Loader::LoadFile(std::string Path)
                 LoadedIndices.push_back(indnum);
             }
         }
-        // Get Mesh Material Name
+        // Get newMesh Material Name
         if (firstToken(curline) == "usemtl")
         {
-            MeshMatNames.push_back(tail(curline));
+            newMeshMatNames.push_back(tail(curline));
 
-            // Create new Mesh, if Material changes within a group
+            // Create new newMesh, if Material changes within a group
             if (!Indices.empty() && !Vertices.empty())
             {
-                // Create Mesh
-                tempMesh = Mesh(Vertices, Indices);
-                tempMesh.MeshName = meshname;
+                // Create newMesh
+                tempnewMesh = newMesh(Vertices, Indices);
+                tempnewMesh.newMeshName = newMeshname;
                 int i = 2;
                 while (1) {
-                    tempMesh.MeshName = meshname + "_" + std::to_string(i);
+                    tempnewMesh.newMeshName = newMeshname + "_" + std::to_string(i);
 
-                    for (auto& m : LoadedMeshes)
-                        if (m.MeshName == tempMesh.MeshName)
+                    for (auto& m : LoadednewMeshes)
+                        if (m.newMeshName == tempnewMesh.newMeshName)
                             continue;
                     break;
                 }
 
-                // Insert Mesh
-                LoadedMeshes.push_back(tempMesh);
+                // Insert newMesh
+                LoadednewMeshes.push_back(tempnewMesh);
 
                 // Cleanup
                 Vertices.clear();
@@ -444,38 +444,38 @@ bool Loader::LoadFile(std::string Path)
     std::cout << std::endl;
 #endif
 
-    // Deal with last mesh
+    // Deal with last newMesh
 
     if (!Indices.empty() && !Vertices.empty())
     {
-        // Create Mesh
-        tempMesh = Mesh(Vertices, Indices);
-        tempMesh.MeshName = meshname;
+        // Create newMesh
+        tempnewMesh = newMesh(Vertices, Indices);
+        tempnewMesh.newMeshName = newMeshname;
 
-        // Insert Mesh
-        LoadedMeshes.push_back(tempMesh);
+        // Insert newMesh
+        LoadednewMeshes.push_back(tempnewMesh);
     }
 
     file.close();
 
-    // Set Materials for each Mesh
-    for (int i = 0; i < MeshMatNames.size(); i++)
+    // Set Materials for each newMesh
+    for (int i = 0; i < newMeshMatNames.size(); i++)
     {
-        std::string matname = MeshMatNames[i];
+        std::string matname = newMeshMatNames[i];
 
         // Find corresponding material name in loaded materials
-        // when found copy material variables into mesh material
+        // when found copy material variables into newMesh material
         for (int j = 0; j < LoadedMaterials.size(); j++)
         {
             if (LoadedMaterials[j].name == matname)
             {
-                LoadedMeshes[i].MeshMaterial = LoadedMaterials[j];
+                LoadednewMeshes[i].newMeshMaterial = LoadedMaterials[j];
                 break;
             }
         }
     }
 
-    if (LoadedMeshes.empty() && LoadedVertices.empty() && LoadedIndices.empty())
+    if (LoadednewMeshes.empty() && LoadedVertices.empty() && LoadedIndices.empty())
     {
         return false;
     }
@@ -579,7 +579,7 @@ void Loader::GenVerticesFromRawOBJ(std::vector<Vertex>& oVerts,
 
     // take care of missing normals
     // these may not be truly acurate but it is the
-    // best they get for not compiling a mesh with normals
+    // best they get for not compiling a newMesh with normals
     if (noNormal)
     {
         glm::vec3 A = oVerts[0].Position - oVerts[1].Position;
